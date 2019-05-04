@@ -15,7 +15,7 @@ annotation_dir = '/home/sap/VOCdevkit2007/VOC2007/Annotations';
 
 addpath /home/sap/VOCdevkit2007/VOCcode
 mkdir(img_dir); mkdir(sets_dir); mkdir(annotation_dir);
-
+%{
 %% organize images & prepare split list.
 %{
 % process SYNTHIA train images
@@ -199,7 +199,7 @@ for i = 1:numel(file_names)
 	end
 end
 
-
+%}
 % process CITYSACPES train labels.
 load cityscapes_synthia_semantics.mat
 [~,lb_filter] = ismember(cityscapes_semantics,instance_semantics);
@@ -212,7 +212,7 @@ for i = 1:numel(file_names)
 
     im_name = strsplit(file_names{i},'/'); 
     im_name = strrep(im_name{end},'_gtFine_instanceIds.png','_leftImg8bit');
-    im_name = ['source_' im_name];
+    im_name = ['target_' im_name];
 
     im_inst = imread(file_names{i});
     im_lb = imread(strrep(file_names{i},'_gtFine_instanceIds.png','_gtFine_labelIds.png'));
@@ -271,7 +271,7 @@ for i = 1:numel(file_names)
 
     im_name = strsplit(file_names{i},'/'); 
     im_name = strrep(im_name{end},'_gtFine_instanceIds.png','_leftImg8bit');
-    im_name = ['source_' im_name];
+    im_name = ['target_' im_name];
 
     im_inst = imread(file_names{i});
     im_lb = imread(strrep(file_names{i},'_gtFine_instanceIds.png','_gtFine_labelIds.png'));
