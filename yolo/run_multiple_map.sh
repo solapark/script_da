@@ -14,7 +14,7 @@ do
 	if [[ $weight =~ $target_weight ]]
 	then 
 		echo "correct"
-		./scripts/run_map.sh $data $cfg "$weight" $map_log 
+		./../script_da/yolo/run_map.sh $data $cfg "$weight" $map_log 
 	fi
 	echo "done"
 done
