@@ -55,7 +55,7 @@ def plot_loss(file_path, loss_ax, iters, loss):
 def plot_map(file_path, map_ax, color):
 #file_path = "pathToFile/map_testTarget_with_networkName.log"
     test_target = get_testTarget_from_map_path(file_path)
-    label = 'map_' + test_target
+    label = 'map_' + test_target + '(%)'
 
     map_iters = [0]
     map_values = [0]
@@ -74,7 +74,7 @@ def plot_map(file_path, map_ax, color):
         if len(word) > 1 and word[1]=='mean':
             map_token = word[6]
             map_value = map_token.split(',')[0]
-            map_values.append(float(map_value))
+            map_values.append(float(map_value)*100)
 
     map_iters,map_values = zip(*sorted(zip(map_iters,map_values)))
     
