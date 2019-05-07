@@ -4,10 +4,12 @@ import os
 from os import listdir, getcwd
 from os.path import join
 
-sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test'), ('synthia', 'train'), ('synthia', 'test')]
+#sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test'), ('synthia', 'train'), ('synthia', 'test')]
+sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test')]
 #classes = ["car"]
 classes = ['person',	'rider',	'car',	'truck',	'bus',	'train',	'motorcycle',	'bicycle']
-
+wd ='/home/sap/dataset/xml_labels'
+img_dir = '/home/sap/dataset/images'
 
 def convert(size, box):
     dw = 1./(size[0])
@@ -41,9 +43,6 @@ def convert_annotation(xml_file, txt_file):
         b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
         bb = convert((w,h), b)
         out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
-
-wd ='/home/sap/dataset/xml_labels'
-img_dir = '/home/sap/dataset/images'
 
 for data_name, kind in sets:
     path =wd +'/'+data_name+ '/'+kind  
