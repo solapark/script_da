@@ -57,8 +57,8 @@ def plot_map(file_path, map_ax, color):
     test_target = get_testTarget_from_map_path(file_path)
     label = 'map_' + test_target + '(%)'
 
-    map_iters = [0]
-    map_values = [0]
+    map_iters = []
+    map_values = []
 
     f = open(file_path)
     lines  = [line.rstrip("\n") for line in f.readlines()]
