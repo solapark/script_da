@@ -43,7 +43,7 @@ def plot_loss(file_path, loss_ax, iters, loss):
 #file_path = "pathToFile/loss_networkName.log"
     loss_ax.plot(iters,loss, color = 'y', label = 'loss')
     if(len(loss)):
-        ylim = min(loss)+2
+        ylim = min(max(loss)*1.2, min(loss)+2)
     else :
         ylim = 1
     loss_ax.set_ylim(0, ylim)
