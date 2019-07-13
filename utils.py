@@ -1,4 +1,5 @@
 import glob
+import os
 
 def get_file_list_from_dir(dir_path, exp=''):
     #use : get_file_list_from_dir("/home/sap", "png")
@@ -17,3 +18,8 @@ def get_list_from_file(file_path):
 def get_name_from_path(path):
     name = path.split('/')[-1]
     return name
+
+def makedir(path):
+	if not os.path.exists(path):
+		os.makedirs(path)
+
