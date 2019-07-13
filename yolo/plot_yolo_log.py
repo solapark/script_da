@@ -33,7 +33,7 @@ def extract_loss_list(file_path) :
     
     for line in lines:
         word = line.split(' ')
-        if len(word) > 1 and word[1][-1:]==':' and word[1][0] in numbers :
+        if len(word) > 4 and word[1][-1:]==':' and word[1][0] in numbers :
             iters.append(int(word[1][:-1]))            
             loss.append(float(word[3]))
 
