@@ -56,9 +56,9 @@ def revive_real_obj(image_path_list_file_path, removed_obj_dir, raw_image_dir):
             print("reviving object %s / %s done" %(i+1, image_len))
 
 if __name__ == "__main__":
-    erase_target = '/home/sap/dataset/images/cityscapes_pseudo_label/cityscapes_pseudo_label_thresh_0.001.txt'
-    erase_dir = '/home/sap/dataset/images/cityscapes_pseudo_label/thresh_0.001/'
-    revive_target = '/home/sap/dataset/images/cityscapes_pseudo_label/cityscapes_pseudo_label_thresh_0.8.txt'
+    erase_target = '/home/sap/dataset/images/cityscapes_8class_pseudo/thresh_0_20.txt'
+    erase_dir = '/home/sap/dataset/images/cityscapes_8class_pseudo/thresh_0_20/'
+    revive_target = '/home/sap/dataset/images/cityscapes_8class_pseudo/thresh_0_93.txt'
     raw_image_dir = '/home/sap/dataset/images/cityscapes/train/'
-    #erase_vague_obj(erase_target)
+    erase_vague_obj(erase_target)
     revive_real_obj(revive_target, erase_dir, raw_image_dir)

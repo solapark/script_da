@@ -4,12 +4,16 @@ import os
 from os import listdir, getcwd
 from os.path import join
 
-#sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test'), ('synthia', 'train'), ('synthia', 'test')]
-sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test')]
-#classes = ["car"]
-classes = ['person',	'rider',	'car',	'truck',	'bus',	'train',	'motorcycle',	'bicycle']
-wd ='/home/sap/dataset/xml_labels'
-img_dir = '/home/sap/dataset/images'
+#sets=[('cityscapes_8class', 'train'), ('cityscapes_8class', 'test')]
+#classes = ['person',	'rider',	'car',	'truck',	'bus',	'train',	'motorcycle',	'bicycle']
+#wd ='/home/sap/dataset/xml_labels'
+#img_dir = '/home/sap/dataset/images'
+
+#clipart 
+sets=[('', 'train'), ('', 'test')]
+classes = ["aeroplane",	"bicycle",		"bird",		"boat",		"bottle",	"bus",	"car",	"cat",	"chair",	"cow",	"diningtable",	"dog",	"horse",	"motorbike",	"person",	"pottedplant",	"sheep",	"sofa",		"train",	"tvmonitor"]
+wd = '/data1/sap/download_dataset/clipart/Annotations'
+img_dir = '/data1/sap/download_dataset/clipart/JPEGImages'
 
 def convert(size, box):
     dw = 1./(size[0])

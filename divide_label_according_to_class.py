@@ -1,9 +1,9 @@
 from utils import * 
 import os
 
-label_dir_path ='/home/sap/dataset/VOC/VOCdevkit/VOC2012/labels'
+label_dir_path ='/home/sap/dataset/clipart/train/labels'
 label_dir_name = label_dir_path.split('/')[-1]
-obj_names_path = '/home/sap/darknet/VOC/VOC.names'
+obj_names_path = '/home/sap/darknet/clipart/clipart.names'
 label_path_list = get_file_list_from_dir(label_dir_path)
 obj_names_list = get_list_from_file(obj_names_path)
 
