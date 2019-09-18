@@ -1,15 +1,11 @@
 from utils import *
 
 src_file = '/data1/sap/interpark_data/test/label.txt'
-dst_file = '/data1/sap/interpark_data/test/label_bad_obj6.txt'
+dst_file = '/data1/sap/interpark_data/test/label_Corntea_Kantata.txt'
 
 class2class = {\
 "0" : "0",\
-"4" : "1",\
-"8" : "2",\
-"14" : "3",\
-"28" : "4",\
-"33" : "5"\
+"28" : "1",\
 }
 
 src_lines = get_list_from_file(src_file)

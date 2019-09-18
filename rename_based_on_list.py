@@ -1,17 +1,18 @@
 from utils import get_list_from_file, get_name_from_path
 import sys
 import shutil
+import random
 
-source_path ='/home/sap/dataset/images/fake_cityscapes_2048/train'
-target_path ='/home/sap/dataset/images/fake_cityscapes_2048/train'
+source_path ='/data1/sap/cyclegan_interpark/dataset/Corntea_Kantata_640/trainB.txt'
+target_path ='/data1/sap/cyclegan_interpark/dataset/Corntea_Kantata_640/trainA.txt'
+random_list = 1
 
 def rename_based_on_list(argv):
-    if(len(argv) > 1): 
-        source_path =argv[1]
-        target_path =argv[2]
-
     source_list = get_list_from_file(source_path)
     target_list = get_list_from_file(target_path)
+    if(random_list) :
+        random.shuffle(source_list)
+        random.shuffle(target_list)
 
     for source, target in zip(source_list, target_list) :
         source_name = get_name_from_path(source)
