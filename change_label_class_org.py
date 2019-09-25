@@ -7,19 +7,20 @@ class2class = {\
 "1" : "6",\
 "2" : "7",\
 "3" : "8",\
-"0" : "9"\
+"4" : "9"\
 }
 
 src_files = get_list_from_file(src_file_path)
 
 for src_file in src_files : 
-    src_lines = get_list_form_file(src_file)
-    new_file = open(src_file, "a")
+    print('src_file', src_file)
+    src_lines = get_list_from_file(src_file)
+    new_file = open(src_file, "w")
     for line in src_lines :
         line_split =line.split() 
         old_class = line_split[0]
         contents = line_split[1:]
-        new_class = class2class[class_num]
-        new_line = new_class + " " + " ".join([content in contents]) + "\n" 
+        new_class = class2class[old_class]
+        new_line = new_class + " " + " ".join(contents) + "\n" 
         new_file.write(new_line)
-    src_file.close()
+    new_file.close()
