@@ -1,10 +1,15 @@
 from utils import *
 
-file_list_path = "/data1/sap/interpark_data/CornTea_Kantata_part/merge_Kantata.txt"
-dst_folder = "/data1/sap/interpark_data/CornTea_Kantata_part/with_parent/"
+file_list_path = "/data1/sap/interpark_data/test/class/part_label/Kantata_pure_part.txt"
+dst_folder = "/data1/sap/interpark_data/test/class/part_label/Kantata_with_parent/"
 names_file_path ="/data1/sap/interpark_data/CornTea_Kantata_part/with_parent.names"
 base_class_name = "Kantata"
 class_id_offset = 1
+
+names_list = get_list_from_file(names_file_path)
+def get_idx_from_name(names_list, class_id):
+    name = names_list[class_id]
+    return int(name.split('_')[1])
 
 def get_class_from_label(label) :
     return int(label.split()[0])
@@ -18,10 +23,13 @@ def get_class_list(labels_list):
     class_list = [get_class_from_label(label) for label in labels_list]
     return class_list
 
-def get_merged_class_id(start_idx, dst_class_id, class_id_offset) :
-    class_name = base_class_name + "_" + str(start_idx+class_id_offset) + "_" + str(dst_class_id+class_id_offset)
+def get_merged_class_id(start_class_id, dst_class_id, class_id_offset) :
+    start_idx = get_idx_from_name(names_list, start_class_id)
+    dst_idx = get_idx_from_name(names_list, dst_class_id)
+    class_name = base_class_name + "_" + str(start_idx) + "_" + str(dst_idx)
     if class_name not in names_list : names_list.append(class_name)
     class_id = names_list.index(class_name)
+    print("start_class", names_list[start_class_id], 'dst_class', names_list[dst_class_id], 'class_name', class_name, 'class_id', class_id)
     return class_id
 
 def merge_two_label(names_list, start_idx, src_label, dst_label, class_id_offset) :
@@ -63,6 +71,7 @@ file_list = get_list_from_file(file_list_path)
 names_list = get_list_from_file(names_file_path)
 
 for file_path in file_list :
+    print(file_path)
     file_name = get_name_from_path(file_path)
     dst_path = dst_folder + file_name
 
@@ -74,7 +83,9 @@ for file_path in file_list :
     old_labels = [sorted_old_label for _,sorted_old_label in sorted(zip(class_list, old_labels))]
 
     for i, label in enumerate(old_labels) :
-        make_parent_label(names_list, dst_file, i, label, old_labels[i+1:], class_id_offset)
+        start_class_id =get_class_from_label(label) 
+        make_parent_label(names_list, dst_file, start_class_id, label, old_labels[i+1:], class_id_offset)
+        #make_parent_label(names_list, dst_file, i, label, old_labels[i+1:], class_id_offset)
 
     dst_file.close()
     
