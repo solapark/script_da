@@ -7,12 +7,17 @@ from sklearn.utils.multiclass import unique_labels
 
 #data_name = 'Corntea_Kantata_deep_part3'
 #data_name = 'Corntea_Kantata_pure_part'
-#data_name = 'Corntea_Kantata_600_with_parent'
-data_name = 'Corntea_Kantata_600_org'
-iteration = '8000'
+#data_name = 'Corntea_Kantata_600_with_parent_new3'
+data_name = 'fake_Corntea_Kantata_org'
+#data_name = 'Corntea_Kantata_600_org'
+#data_name = 'fake_Corntea_Kantata_org'
+#iteration = '27000'
+iteration = '7000'
 base_dir = '/home/sap/darknet_interpark/'
 #base_dir = '/home/sap/darknet_partdet/'
 #base_dir = '/home/sap/darknet_partdet_tmp/'
+target = []
+#target = [0, 12, 13, 14, 15, 17, 18, 6, 22, 23, 26, 28]
 
 #gt_file ='/data1/sap/interpark_data/test/label_Corntea_Kantata.txt'
 gt_file ='/data1/sap/interpark_data/test/label_Corntea_Kantata_pure.txt'
@@ -150,7 +155,8 @@ for label_line, detection_line in zip(label_lines, detection_lines) :
     is_found = [0] * (gt_names_size+1)
     for detection_class in detection_classes :
         detection_class = int(detection_class)
-        #if(detection_class ==11) : continue
+        #if(detection_class ==target) : continue
+        if(detection_class in target) : continue
         cm_truth.append(truth_class)
         real_detection_class = det_start_idx  + detection_class
         if not double_box[detection_class] :
@@ -176,10 +182,15 @@ det_idx = slice(det_start_idx, double_box_start_idx)
 double_box_idx = slice(double_box_start_idx, bg_idx)
 bg_idx = slice(bg_idx, None)
 title = get_title_from_log_file(detection_file, data_name)
-print(confusion_matrix(cm_truth, cm_pred, labels=list(range(names_size))))
+cm_result = confusion_matrix(cm_truth, cm_pred, labels=list(range(names_size)))
+print_result =  str(cm_result[0, 0]) + '\t' + str(cm_result[0, 1]) + '\n' + str(cm_result[1, 0]) + '\t' + str(cm_result[1, 1])
+print('iter', iteration)
+print(print_result)
+'''
 plot_confusion_matrix(cm_truth, cm_pred, names_list, gt_idx, det_idx, double_box_idx, bg_idx, title=title)
 
 plt.rcParams["figure.figsize"] = (500, 500)
 #plt.figure(figsize= (50, 50))
 plt.savefig('test.png')
 plt.show()
+'''
