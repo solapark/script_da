@@ -8,11 +8,13 @@ import numpy as np
 
 def get_network_name_from_loss_path(file_path):
 #file_path = "pathToFile/loss_networkName.log"
-    #target = '.*loss_().log'
-    #regex = re.compile(target)
-    regex = re.compile(r'.*loss_(.*).log')
+#file_path = "network_name/loss/loss.log"
+    #regex = re.compile(r'.*loss_(.*).log')
+    regex = re.compile(r'(.*)/loss/loss.log')
     matchobj = regex.search(file_path)
-    return  matchobj.group(1)
+    net_name =matchobj.group(1) 
+    print('network_name :', net_name)
+    return  net_name
 
 def get_testTarget_from_map_path(file_path):
 #file_path = "pathToFile/map_testTarget_with_networkName.log"
@@ -52,6 +54,12 @@ def plot_loss(file_path, loss_ax, iters, loss):
     loss_ax.grid()
     loss_ax.legend()
 
+def get_map_max(iters, map_values) :
+    max_map = max(map_values)
+    max_idx = map_values.index(max_map)
+    max_iter =iters[max_idx]
+    return max_iter, max_map
+
 def plot_map(file_path, map_ax, color):
 #file_path = "pathToFile/map_testTarget_with_networkName.log"
     test_target = get_testTarget_from_map_path(file_path)
@@ -77,6 +85,8 @@ def plot_map(file_path, map_ax, color):
             map_values.append(float(map_value)*100)
 
     map_iters,map_values = zip(*sorted(zip(map_iters,map_values)))
+    max_iter, max_map = get_map_max(map_iters,map_values)
+    print('max_map', max_map, '@', max_iter)
     
     map_ax.plot(map_iters, map_values, marker = 'o', color=color, label = label)
     map_ax.set_ylabel(label)
