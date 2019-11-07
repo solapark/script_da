@@ -77,6 +77,7 @@ def plot_map(file_path, map_ax, color):
             weight_path = word[-1]
             weight_token = weight_path.split('_')[-1]
             weight_num = weight_token.split('.')[0]
+            if not weight_num.isdigit(): continue
             map_iters.append(int(weight_num))            
 
         if len(word) > 1 and word[1]=='mean':
@@ -86,7 +87,7 @@ def plot_map(file_path, map_ax, color):
 
     map_iters,map_values = zip(*sorted(zip(map_iters,map_values)))
     max_iter, max_map = get_map_max(map_iters,map_values)
-    print('max_map', max_map, '@', max_iter)
+    print(test_target, 'max map :', max_map, '@', max_iter)
     
     map_ax.plot(map_iters, map_values, marker = 'o', color=color, label = label)
     map_ax.set_ylabel(label)
