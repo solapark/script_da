@@ -134,7 +134,7 @@ def main(argv):
             color = (color_offset, 0.5,0.5)
             plot_map(map_path, map_ax, color)
 
-    plt.xlim(xmin = 0, xmax = whole_iters[-1])
+    plt.xlim(xmin = whole_iters[0], xmax = whole_iters[-1])
     plt.tight_layout()
     plt.show()
     
