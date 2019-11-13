@@ -10,7 +10,7 @@ def get_network_name_from_loss_path(file_path):
 #file_path = "pathToFile/loss_networkName.log"
 #file_path = "network_name/loss/loss.log"
     #regex = re.compile(r'.*loss_(.*).log')
-    regex = re.compile(r'(.*)/loss/loss.log')
+    regex = re.compile(r'(.*)/loss/.*loss.*.log')
     matchobj = regex.search(file_path)
     net_name =matchobj.group(1) 
     print('train :', net_name)
@@ -134,7 +134,8 @@ def main(argv):
             color = (color_offset, 0.5,0.5)
             plot_map(map_path, map_ax, color)
 
-    plt.xlim(xmin = whole_iters[0], xmax = whole_iters[-1])
+    #plt.xlim(xmin = whole_iters[0], xmax = whole_iters[-1])
+    plt.xlim(xmin = whole_iters[0])
     plt.tight_layout()
     plt.show()
     
